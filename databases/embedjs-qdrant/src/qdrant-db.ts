@@ -60,12 +60,21 @@ export class QdrantDb implements BaseVectorDatabase {
         return processed;
     }
 
-    async similaritySearch(query: number[], k: number): Promise<ExtractChunkData[]> {
+    async similaritySearch(
+        query: number[],
+        k: number,
+        filterMach?: Record<string, string>,
+    ): Promise<ExtractChunkData[]> {
         const queryResponse = await this.client.search(this.clusterName, {
             limit: k,
             vector: query,
             with_payload: true,
+            filter: filterMach
+                ? { should: Object.entries(filterMach).map(([key, value]) => ({ key, match: { value } })) }
+                : undefined,
         });
+
+        this.debug(`Got ${queryResponse.length} results`, queryResponse);
 
         return queryResponse.map((match) => {
             const pageContent = match.payload.pageContent;

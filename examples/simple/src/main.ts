@@ -1,16 +1,35 @@
 import 'dotenv/config';
-import { RAGApplicationBuilder, SIMPLE_MODELS } from '@llm-tools/embedjs';
-import { OpenAiEmbeddings } from '@llm-tools/embedjs-openai';
+import { RAGApplicationBuilder, TextLoader } from '@llm-tools/embedjs';
+import { OpenAi, OpenAiEmbeddings } from '@llm-tools/embedjs-openai';
 import { WebLoader } from '@llm-tools/embedjs-loader-web';
-import { HNSWDb } from '@llm-tools/embedjs-hnswlib';
+import { QdrantDb } from '@llm-tools/embedjs-qdrant';
 
 const ragApplication = await new RAGApplicationBuilder()
-    .setModel(SIMPLE_MODELS.OPENAI_GPT4_O)
+    .setModel(new OpenAi({ model: 'gpt-4o-mini-2024-07-18', maxTokens: 8192 }))
     .setEmbeddingModel(new OpenAiEmbeddings())
-    .setVectorDatabase(new HNSWDb())
+    .setVectorDatabase(
+        new QdrantDb({
+            url: 'http://localhost:6333',
+            clusterName: 'develop',
+            apiKey: '123',
+        }),
+    )
     .build();
 
-await ragApplication.addLoader(new WebLoader({ urlOrContent: 'https://www.forbes.com/profile/elon-musk' }));
-await ragApplication.addLoader(new WebLoader({ urlOrContent: 'https://en.wikipedia.org/wiki/Elon_Musk' }));
+await ragApplication.addLoader(
+    new WebLoader({
+        urlOrContent: 'https://www.forbes.com/profile/elon-musk',
+        metadata: { customType: 'general' },
+    }),
+);
+await ragApplication.addLoader(
+    new TextLoader({
+        text: 'Elon Musk is the CEO of Tesla\nElon Musk is the CEO of SpaceX',
+        splitByLine: true,
+        metadata: { customFarmId: 'manual' },
+    }),
+);
 
-await ragApplication.query('What is the net worth of Elon Musk today?');
+await ragApplication.query('Elon Musk is the CEO of?', {
+    filterMatch: { customFarmId: 'manual', customType: 'general' },
+});

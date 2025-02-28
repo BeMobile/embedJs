@@ -354,11 +354,12 @@ export class RAGApplication {
      * based on a relevance cutoff value, sorted in descending order of score, and then sliced to return
      * only the number of results specified by the `searchResultCount` property.
      */
-    public async getEmbeddings(cleanQuery: string) {
+    public async getEmbeddings(cleanQuery: string, filterMatch?: Record<string, string>) {
         const queryEmbedded = await this.embeddingModel.embedQuery(cleanQuery);
         const unfilteredResultSet = await this.vectorDatabase.similaritySearch(
             queryEmbedded,
             this.searchResultCount + 10,
+            filterMatch,
         );
         this.debug(`Query resulted in ${unfilteredResultSet.length} chunks before filteration...`);
 
@@ -374,9 +375,9 @@ export class RAGApplication {
      * needs to be processed.
      * @returns An array of unique page content items / chunks.
      */
-    public async search(query: string) {
+    public async search(query: string, filterMatch?: Record<string, string>) {
         const cleanQuery = cleanString(query);
-        const rawContext = await this.getEmbeddings(cleanQuery);
+        const rawContext = await this.getEmbeddings(cleanQuery, filterMatch);
 
         return [...new Map(rawContext.map((item) => [item.pageContent, item])).values()];
     }
@@ -395,6 +396,8 @@ export class RAGApplication {
      * used to maintain context or history related to the conversation.
      * - customContext - You can pass in custom context from your own RAG stack. Passing.
      * your own context will disable the inbuilt RAG retrieval for that specific query
+     * - filterMatch - The `filterMatch` parameter is an optional object that contains key-value pairs
+     * used to filter the search results based on specific metadata values.
      * @returns The `query` method returns a Promise that resolves to an object with two properties:
      * `result` and `sources`. The `result` property is a string representing the result of querying
      * the LLM model with the provided query template, user query, context, and conversation history. The
@@ -402,14 +405,16 @@ export class RAGApplication {
      */
     public async query(
         userQuery: string,
-        options?: { conversationId?: string; customContext?: Chunk[] },
+        options?: { conversationId?: string; customContext?: Chunk[]; filterMatch?: Record<string, string> },
     ): Promise<QueryResponse> {
         if (!this.model) {
             throw new Error('LLM Not set; query method not available');
         }
 
         let context = options?.customContext;
-        if (!context) context = await this.search(userQuery);
+        if (!context) {
+            context = await this.search(userQuery, options.filterMatch);
+        }
 
         let conversationId = options?.conversationId;
         if (!conversationId && this.storeConversationsToDefaultThread) {

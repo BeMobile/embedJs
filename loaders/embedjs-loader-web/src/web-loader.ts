@@ -6,24 +6,31 @@ import md5 from 'md5';
 import { BaseLoader } from '@llm-tools/embedjs-interfaces';
 import { isValidURL, truncateCenterString, cleanString, getSafe } from '@llm-tools/embedjs-utils';
 
+type CustomMetadata = Record<`custom${string}`, string>;
+
 export class WebLoader extends BaseLoader<{ type: 'WebLoader' }> {
     private readonly debug = createDebugMessages('embedjs:loader:WebLoader');
     private readonly urlOrContent: string;
     private readonly isUrl: boolean;
+    private readonly metadata?: CustomMetadata;
 
     constructor({
         urlOrContent,
         chunkSize,
         chunkOverlap,
+        metadata,
     }: {
         urlOrContent: string;
         chunkSize?: number;
         chunkOverlap?: number;
+        /** Metadata associated with the text. The metadata should start with `custom`. */
+        metadata?: CustomMetadata;
     }) {
         super(`WebLoader_${md5(urlOrContent)}`, { urlOrContent }, chunkSize ?? 2000, chunkOverlap ?? 0);
 
         this.isUrl = isValidURL(urlOrContent) ? true : false;
         this.urlOrContent = urlOrContent;
+        this.metadata = metadata || undefined;
     }
 
     override async *getUnfilteredChunks() {
@@ -47,6 +54,7 @@ export class WebLoader extends BaseLoader<{ type: 'WebLoader' }> {
                 yield {
                     pageContent: chunk,
                     metadata: {
+                        ...this.metadata,
                         type: 'WebLoader' as const,
                         source: this.isUrl ? this.urlOrContent : tuncatedObjectString,
                     },
