@@ -314,7 +314,7 @@ export class RAGApplication<CustomFieldsType extends Record<string, unknown>> {
      * @param {string} conversationId - The `conversationId` that you want to delete. Pass 'default' to delete
      * the default conversation thread that is created and maintained automatically
      */
-    public async deleteConversation(conversationId: string, customFields: CustomFieldsType) {
+    public async deleteConversation(conversationId: string, customFields?: CustomFieldsType) {
         if (this.store) {
             await this.store.deleteConversation(conversationId, customFields);
         }
@@ -405,12 +405,12 @@ export class RAGApplication<CustomFieldsType extends Record<string, unknown>> {
      */
     public async query(
         userQuery: string,
-        options: {
+        options?: {
             conversationId?: string;
             customContext?: Chunk[];
             filterMatch?: Record<string, string>;
         },
-        customFields: CustomFieldsType,
+        customFields?: CustomFieldsType,
     ): Promise<QueryResponse> {
         if (!this.model) {
             throw new Error('LLM Not set; query method not available');
