@@ -1,9 +1,9 @@
 {
     "name": "@betalent/embedjs-utils",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "description": "Useful util functions when extending the embedjs ecosystem",
     "dependencies": {
-        "@betalent/embedjs-interfaces": "0.1.2"
+        "@betalent/embedjs-interfaces": "0.1.3"
     },
     "type": "module",
     "main": "./src/index.js",

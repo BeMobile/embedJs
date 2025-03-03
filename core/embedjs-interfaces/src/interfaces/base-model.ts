@@ -93,7 +93,7 @@ export abstract class BaseModel {
         if (conversationId) {
             if (!(await BaseModel.store.hasConversation(conversationId, customFields))) {
                 this.baseDebug(`Conversation with id '${conversationId}' is new`);
-                await BaseModel.store.addConversation(conversationId, customFields);
+                await BaseModel.store.addConversation(conversationId, customFields, userEntry);
             }
 
             conversation = await BaseModel.store.getConversation(conversationId, customFields);

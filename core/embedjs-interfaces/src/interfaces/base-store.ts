@@ -14,7 +14,7 @@ export interface BaseStore<CustomFieldsType extends Record<string, unknown> = Re
     loaderCustomDelete(key: string): Promise<void>;
     deleteLoaderMetadataAndCustomValues(loaderId: string): Promise<void>;
 
-    addConversation(conversationId: string, customFields: CustomFieldsType): Promise<void>;
+    addConversation(conversationId: string, customFields: CustomFieldsType, userEntry: Message): Promise<void>;
     getConversation(conversationId: string, customFields: CustomFieldsType): Promise<Conversation>;
     hasConversation(conversationId: string, customFields: CustomFieldsType): Promise<boolean>;
     deleteConversation(conversationId: string, customFields: CustomFieldsType): Promise<void>;

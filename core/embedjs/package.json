@@ -1,12 +1,12 @@
 {
     "type": "module",
     "name": "@betalent/embedjs",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "description": "A NodeJS RAG framework to easily work with LLMs and custom datasets",
     "dependencies": {
         "@langchain/textsplitters": "^0.1.0",
-        "@betalent/embedjs-interfaces": "0.1.2",
-        "@betalent/embedjs-utils": "0.1.2",
+        "@betalent/embedjs-interfaces": "0.1.3",
+        "@betalent/embedjs-utils": "0.1.3",
         "debug": "^4.4.0",
         "langchain": "^0.3.8",
         "md5": "^2.3.0",

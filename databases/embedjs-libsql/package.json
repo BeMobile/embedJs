@@ -1,11 +1,11 @@
 {
     "name": "@betalent/embedjs-libsql",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "description": "Add LibSQL support to embedjs",
     "dependencies": {
         "@libsql/client": "^0.14.0",
-        "@betalent/embedjs-interfaces": "0.1.2",
-        "@betalent/embedjs-utils": "0.1.2",
+        "@betalent/embedjs-interfaces": "0.1.3",
+        "@betalent/embedjs-utils": "0.1.3",
         "debug": "^4.4.0"
     },
     "type": "module",

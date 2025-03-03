@@ -1,10 +1,10 @@
 {
     "name": "@betalent/embedjs-cosmos",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "description": "Add CosmosDB support to embedjs",
     "dependencies": {
         "@azure/cosmos": "^4.2.0",
-        "@betalent/embedjs-interfaces": "0.1.2",
+        "@betalent/embedjs-interfaces": "0.1.3",
         "debug": "^4.4.0"
     },
     "type": "module",
