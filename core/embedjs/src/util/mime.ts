@@ -1,7 +1,7 @@
 import mime from 'mime';
 import createDebugMessages from 'debug';
 
-import { BaseLoader } from '@llm-tools/embedjs-interfaces';
+import { BaseLoader } from '@betalent/embedjs-interfaces';
 import { TextLoader } from '../loaders/text-loader.js';
 
 export async function createLoaderFromMimeType(loaderData: string, mimeType: string): Promise<BaseLoader> {
@@ -10,36 +10,32 @@ export async function createLoaderFromMimeType(loaderData: string, mimeType: str
     switch (mimeType) {
         case 'application/msword':
         case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document': {
-            const { DocxLoader } = await import('@llm-tools/embedjs-loader-msoffice').catch(() => {
-                throw new Error(
-                    'Package `@llm-tools/embedjs-loader-msoffice` needs to be installed to load docx files',
-                );
+            const { DocxLoader } = await import('@betalent/embedjs-loader-msoffice').catch(() => {
+                throw new Error('Package `@betalent/embedjs-loader-msoffice` needs to be installed to load docx files');
             });
             createDebugMessages('embedjs:util:createLoaderFromMimeType')('Dynamically imported DocxLoader');
             return new DocxLoader({ filePathOrUrl: loaderData });
         }
         case 'application/vnd.ms-excel':
         case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': {
-            const { ExcelLoader } = await import('@llm-tools/embedjs-loader-msoffice').catch(() => {
+            const { ExcelLoader } = await import('@betalent/embedjs-loader-msoffice').catch(() => {
                 throw new Error(
-                    'Package `@llm-tools/embedjs-loader-msoffice` needs to be installed to load excel files',
+                    'Package `@betalent/embedjs-loader-msoffice` needs to be installed to load excel files',
                 );
             });
             createDebugMessages('embedjs:util:createLoaderFromMimeType')('Dynamically imported ExcelLoader');
             return new ExcelLoader({ filePathOrUrl: loaderData });
         }
         case 'application/pdf': {
-            const { PdfLoader } = await import('@llm-tools/embedjs-loader-pdf').catch(() => {
-                throw new Error('Package `@llm-tools/embedjs-loader-pdf` needs to be installed to load PDF files');
+            const { PdfLoader } = await import('@betalent/embedjs-loader-pdf').catch(() => {
+                throw new Error('Package `@betalent/embedjs-loader-pdf` needs to be installed to load PDF files');
             });
             createDebugMessages('embedjs:util:createLoaderFromMimeType')('Dynamically imported PdfLoader');
             return new PdfLoader({ filePathOrUrl: loaderData });
         }
         case 'application/vnd.openxmlformats-officedocument.presentationml.presentation': {
-            const { PptLoader } = await import('@llm-tools/embedjs-loader-msoffice').catch(() => {
-                throw new Error(
-                    'Package `@llm-tools/embedjs-loader-msoffice` needs to be installed to load pptx files',
-                );
+            const { PptLoader } = await import('@betalent/embedjs-loader-msoffice').catch(() => {
+                throw new Error('Package `@betalent/embedjs-loader-msoffice` needs to be installed to load pptx files');
             });
             createDebugMessages('embedjs:util:createLoaderFromMimeType')('Dynamically imported PptLoader');
             return new PptLoader({ filePathOrUrl: loaderData });
@@ -50,8 +46,8 @@ export async function createLoaderFromMimeType(loaderData: string, mimeType: str
                 `Fine type for '${loaderData}' is '${fineType}'`,
             );
             if (fineType === 'text/csv') {
-                const { CsvLoader } = await import('@llm-tools/embedjs-loader-csv').catch(() => {
-                    throw new Error('Package `@llm-tools/embedjs-loader-csv` needs to be installed to load CSV files');
+                const { CsvLoader } = await import('@betalent/embedjs-loader-csv').catch(() => {
+                    throw new Error('Package `@betalent/embedjs-loader-csv` needs to be installed to load CSV files');
                 });
 
                 createDebugMessages('embedjs:util:createLoaderFromMimeType')('Dynamically imported CsvLoader');
@@ -59,22 +55,22 @@ export async function createLoaderFromMimeType(loaderData: string, mimeType: str
             } else return new TextLoader({ text: loaderData });
         }
         case 'application/csv': {
-            const { CsvLoader } = await import('@llm-tools/embedjs-loader-csv').catch(() => {
-                throw new Error('Package `@llm-tools/embedjs-loader-csv` needs to be installed to load CSV files');
+            const { CsvLoader } = await import('@betalent/embedjs-loader-csv').catch(() => {
+                throw new Error('Package `@betalent/embedjs-loader-csv` needs to be installed to load CSV files');
             });
             createDebugMessages('embedjs:util:createLoaderFromMimeType')('Dynamically imported CsvLoader');
             return new CsvLoader({ filePathOrUrl: loaderData });
         }
         case 'text/html': {
-            const { WebLoader } = await import('@llm-tools/embedjs-loader-web').catch(() => {
-                throw new Error('Package `@llm-tools/embedjs-loader-web` needs to be installed to load web documents');
+            const { WebLoader } = await import('@betalent/embedjs-loader-web').catch(() => {
+                throw new Error('Package `@betalent/embedjs-loader-web` needs to be installed to load web documents');
             });
             createDebugMessages('embedjs:util:createLoaderFromMimeType')('Dynamically imported WebLoader');
             return new WebLoader({ urlOrContent: loaderData });
         }
         case 'text/xml': {
-            const { SitemapLoader } = await import('@llm-tools/embedjs-loader-sitemap').catch(() => {
-                throw new Error('Package `@llm-tools/embedjs-loader-sitemap` needs to be installed to load sitemaps');
+            const { SitemapLoader } = await import('@betalent/embedjs-loader-sitemap').catch(() => {
+                throw new Error('Package `@betalent/embedjs-loader-sitemap` needs to be installed to load sitemaps');
             });
             createDebugMessages('embedjs:util:createLoaderFromMimeType')('Dynamically imported SitemapLoader');
 
@@ -83,17 +79,17 @@ export async function createLoaderFromMimeType(loaderData: string, mimeType: str
             }
 
             //This is not a Sitemap but is still XML
-            const { XmlLoader } = await import('@llm-tools/embedjs-loader-xml').catch(() => {
-                throw new Error('Package `@llm-tools/embedjs-loader-xml` needs to be installed to load XML documents');
+            const { XmlLoader } = await import('@betalent/embedjs-loader-xml').catch(() => {
+                throw new Error('Package `@betalent/embedjs-loader-xml` needs to be installed to load XML documents');
             });
             createDebugMessages('embedjs:util:createLoaderFromMimeType')('Dynamically imported XmlLoader');
             return new XmlLoader({ filePathOrUrl: loaderData });
         }
         case 'text/x-markdown':
         case 'text/markdown': {
-            const { MarkdownLoader } = await import('@llm-tools/embedjs-loader-markdown').catch(() => {
+            const { MarkdownLoader } = await import('@betalent/embedjs-loader-markdown').catch(() => {
                 throw new Error(
-                    'Package `@llm-tools/embedjs-loader-markdown` needs to be installed to load markdown files',
+                    'Package `@betalent/embedjs-loader-markdown` needs to be installed to load markdown files',
                 );
             });
             createDebugMessages('embedjs:util:createLoaderFromMimeType')('Dynamically imported MarkdownLoader');
@@ -101,8 +97,8 @@ export async function createLoaderFromMimeType(loaderData: string, mimeType: str
         }
         case 'image/png':
         case 'image/jpeg': {
-            const { ImageLoader } = await import('@llm-tools/embedjs-loader-image').catch(() => {
-                throw new Error('Package `@llm-tools/embedjs-loader-image` needs to be installed to load images');
+            const { ImageLoader } = await import('@betalent/embedjs-loader-image').catch(() => {
+                throw new Error('Package `@betalent/embedjs-loader-image` needs to be installed to load images');
             });
             createDebugMessages('embedjs:util:createLoaderFromMimeType')('Dynamically imported ImageLoader');
             return new ImageLoader({ filePathOrUrl: loaderData, mime: mimeType });

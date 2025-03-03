@@ -1,8 +1,8 @@
 import 'dotenv/config';
-import { RAGApplicationBuilder, TextLoader } from '@llm-tools/embedjs';
-import { OpenAi, OpenAiEmbeddings } from '@llm-tools/embedjs-openai';
-import { WebLoader } from '@llm-tools/embedjs-loader-web';
-import { QdrantDb } from '@llm-tools/embedjs-qdrant';
+import { RAGApplicationBuilder, TextLoader } from '@betalent/embedjs';
+import { OpenAi, OpenAiEmbeddings } from '@betalent/embedjs-openai';
+import { WebLoader } from '@betalent/embedjs-loader-web';
+import { QdrantDb } from '@betalent/embedjs-qdrant';
 import { MemoryStore } from 'core/embedjs/src/store/memory-store.js';
 
 const ragApplication = await new RAGApplicationBuilder()

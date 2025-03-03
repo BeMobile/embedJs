@@ -7,14 +7,14 @@ You can also use locally running models by `node-llama-cpp`.
 ## Install LlamaCpp addon
 
 ```bash
-npm install @llm-tools/embedjs-llama-cpp
+npm install @betalent/embedjs-llama-cpp
 ```
 
 ## Usage
 
 ```ts
-import { RAGApplicationBuilder } from '@llm-tools/embedjs';
-import { LlamaCpp } from '@llm-tools/embedjs-llama-cpp';
+import { RAGApplicationBuilder } from '@betalent/embedjs';
+import { LlamaCpp } from '@betalent/embedjs-llama-cpp';
 
 const app = await new RAGApplicationBuilder()
 .setModel(new LlamaCpp({

@@ -8,9 +8,9 @@ This loader automatically reads all the files in the directory and its subdirect
 ## Usage
 
 ```ts
-import { RAGApplicationBuilder, LocalPathLoader } from '@llm-tools/embedjs';
-import { OpenAiEmbeddings } from '@llm-tools/embedjs-openai';
-import { HNSWDb } from '@llm-tools/embedjs-hnswlib';
+import { RAGApplicationBuilder, LocalPathLoader } from '@betalent/embedjs';
+import { OpenAiEmbeddings } from '@betalent/embedjs-openai';
+import { HNSWDb } from '@betalent/embedjs-hnswlib';
 
 const app = await new RAGApplicationBuilder()
 .setModel(SIMPLE_MODELS.OPENAI_GPT4_O)

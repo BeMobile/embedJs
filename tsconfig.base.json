@@ -1,53 +1,120 @@
 {
-    "compileOnSave": false,
-    "compilerOptions": {
-        "rootDir": ".",
-        "sourceMap": true,
-        "esModuleInterop": true,
-        "declaration": false,
-        "moduleResolution": "nodenext",
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "importHelpers": true,
-        "target": "ES2022",
-        "module": "NodeNext",
-        "lib": ["ES2022"],
-        "skipLibCheck": true,
-        "skipDefaultLibCheck": true,
-        "baseUrl": ".",
-        "paths": {
-            "@llm-tools/embedjs": ["core/embedjs/src/index.ts"],
-            "@llm-tools/embedjs-anthropic": ["models/embedjs-anthropic/src/index.ts"],
-            "@llm-tools/embedjs-astra": ["databases/embedjs-astra/src/index.ts"],
-            "@llm-tools/embedjs-cohere": ["models/embedjs-cohere/src/index.ts"],
-            "@llm-tools/embedjs-cosmos": ["databases/embedjs-cosmos/src/index.ts"],
-            "@llm-tools/embedjs-hnswlib": ["databases/embedjs-hnswlib/src/index.ts"],
-            "@llm-tools/embedjs-huggingface": ["models/embedjs-huggingface/src/index.ts"],
-            "@llm-tools/embedjs-interfaces": ["core/embedjs-interfaces/src/index.ts"],
-            "@llm-tools/embedjs-lancedb": ["databases/embedjs-lancedb/src/index.ts"],
-            "@llm-tools/embedjs-libsql": ["databases/embedjs-libsql/src/index.ts"],
-            "@llm-tools/embedjs-lmdb": ["databases/embedjs-lmdb/src/index.ts"],
-            "@llm-tools/embedjs-loader-confluence": ["loaders/embedjs-loader-confluence/src/index.ts"],
-            "@llm-tools/embedjs-loader-csv": ["loaders/embedjs-loader-csv/src/index.ts"],
-            "@llm-tools/embedjs-loader-image": ["loaders/embedjs-loader-image/src/index.ts"],
-            "@llm-tools/embedjs-loader-markdown": ["loaders/embedjs-loader-markdown/src/index.ts"],
-            "@llm-tools/embedjs-loader-msoffice": ["loaders/embedjs-loader-msoffice/src/index.ts"],
-            "@llm-tools/embedjs-loader-pdf": ["loaders/embedjs-loader-pdf/src/index.ts"],
-            "@llm-tools/embedjs-loader-sitemap": ["loaders/embedjs-loader-sitemap/src/index.ts"],
-            "@llm-tools/embedjs-loader-web": ["loaders/embedjs-loader-web/src/index.ts"],
-            "@llm-tools/embedjs-loader-xml": ["loaders/embedjs-loader-xml/src/index.ts"],
-            "@llm-tools/embedjs-loader-youtube": ["loaders/embedjs-loader-youtube/src/index.ts"],
-            "@llm-tools/embedjs-mistral": ["models/embedjs-mistral/src/index.ts"],
-            "@llm-tools/embedjs-mongodb": ["databases/embedjs-mongodb/src/index.ts"],
-            "@llm-tools/embedjs-ollama": ["models/embedjs-ollama/src/index.ts"],
-            "@llm-tools/embedjs-openai": ["models/embedjs-openai/src/index.ts"],
-            "@llm-tools/embedjs-pinecone": ["databases/embedjs-pinecone/src/index.ts"],
-            "@llm-tools/embedjs-qdrant": ["databases/embedjs-qdrant/src/index.ts"],
-            "@llm-tools/embedjs-redis": ["databases/embedjs-redis/src/index.ts"],
-            "@llm-tools/embedjs-utils": ["core/embedjs-utils/src/index.ts"],
-            "@llm-tools/embedjs-vertexai": ["models/embedjs-vertexai/src/index.ts"],
-            "@llm-tools/embedjs-weaviate": ["databases/embedjs-weaviate/src/index.ts"]
-        }
-    },
-    "exclude": ["node_modules", "tmp"]
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "declaration": false,
+    "moduleResolution": "nodenext",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "NodeNext",
+    "lib": [
+      "ES2022"
+    ],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@betalent/embedjs": [
+        "core/embedjs/src/index.ts"
+      ],
+      "@betalent/embedjs-anthropic": [
+        "models/embedjs-anthropic/src/index.ts"
+      ],
+      "@betalent/embedjs-astra": [
+        "databases/embedjs-astra/src/index.ts"
+      ],
+      "@betalent/embedjs-cohere": [
+        "models/embedjs-cohere/src/index.ts"
+      ],
+      "@betalent/embedjs-cosmos": [
+        "databases/embedjs-cosmos/src/index.ts"
+      ],
+      "@betalent/embedjs-hnswlib": [
+        "databases/embedjs-hnswlib/src/index.ts"
+      ],
+      "@betalent/embedjs-huggingface": [
+        "models/embedjs-huggingface/src/index.ts"
+      ],
+      "@betalent/embedjs-interfaces": [
+        "core/embedjs-interfaces/src/index.ts"
+      ],
+      "@betalent/embedjs-lancedb": [
+        "databases/embedjs-lancedb/src/index.ts"
+      ],
+      "@betalent/embedjs-libsql": [
+        "databases/embedjs-libsql/src/index.ts"
+      ],
+      "@betalent/embedjs-lmdb": [
+        "databases/embedjs-lmdb/src/index.ts"
+      ],
+      "@betalent/embedjs-loader-confluence": [
+        "loaders/embedjs-loader-confluence/src/index.ts"
+      ],
+      "@betalent/embedjs-loader-csv": [
+        "loaders/embedjs-loader-csv/src/index.ts"
+      ],
+      "@betalent/embedjs-loader-image": [
+        "loaders/embedjs-loader-image/src/index.ts"
+      ],
+      "@betalent/embedjs-loader-markdown": [
+        "loaders/embedjs-loader-markdown/src/index.ts"
+      ],
+      "@betalent/embedjs-loader-msoffice": [
+        "loaders/embedjs-loader-msoffice/src/index.ts"
+      ],
+      "@betalent/embedjs-loader-pdf": [
+        "loaders/embedjs-loader-pdf/src/index.ts"
+      ],
+      "@betalent/embedjs-loader-sitemap": [
+        "loaders/embedjs-loader-sitemap/src/index.ts"
+      ],
+      "@betalent/embedjs-loader-web": [
+        "loaders/embedjs-loader-web/src/index.ts"
+      ],
+      "@betalent/embedjs-loader-xml": [
+        "loaders/embedjs-loader-xml/src/index.ts"
+      ],
+      "@betalent/embedjs-loader-youtube": [
+        "loaders/embedjs-loader-youtube/src/index.ts"
+      ],
+      "@betalent/embedjs-mistral": [
+        "models/embedjs-mistral/src/index.ts"
+      ],
+      "@betalent/embedjs-mongodb": [
+        "databases/embedjs-mongodb/src/index.ts"
+      ],
+      "@betalent/embedjs-ollama": [
+        "models/embedjs-ollama/src/index.ts"
+      ],
+      "@betalent/embedjs-openai": [
+        "models/embedjs-openai/src/index.ts"
+      ],
+      "@betalent/embedjs-pinecone": [
+        "databases/embedjs-pinecone/src/index.ts"
+      ],
+      "@betalent/embedjs-qdrant": [
+        "databases/embedjs-qdrant/src/index.ts"
+      ],
+      "@betalent/embedjs-redis": [
+        "databases/embedjs-redis/src/index.ts"
+      ],
+      "@betalent/embedjs-utils": [
+        "core/embedjs-utils/src/index.ts"
+      ],
+      "@betalent/embedjs-vertexai": [
+        "models/embedjs-vertexai/src/index.ts"
+      ],
+      "@betalent/embedjs-weaviate": [
+        "databases/embedjs-weaviate/src/index.ts"
+      ]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }

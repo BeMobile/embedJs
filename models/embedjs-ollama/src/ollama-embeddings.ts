@@ -1,5 +1,5 @@
 import { OllamaEmbeddings as OllamaEmbedding, OllamaInput } from '@langchain/ollama';
-import { BaseEmbeddings } from '@llm-tools/embedjs-interfaces';
+import { BaseEmbeddings } from '@betalent/embedjs-interfaces';
 
 export class OllamaEmbeddings extends BaseEmbeddings {
     private model: OllamaEmbedding;

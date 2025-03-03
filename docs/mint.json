@@ -38,7 +38,7 @@
     ],
     "topbarCtaButton": {
         "name": "Install",
-        "url": "https://www.npmjs.com/package/@llm-tools/embedjs"
+        "url": "https://www.npmjs.com/package/@betalent/embedjs"
     },
     "primaryTab": {
         "name": "📘 Documentation"

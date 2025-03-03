@@ -5,9 +5,9 @@ import createDebugMessages from 'debug';
 import fs from 'node:fs';
 import md5 from 'md5';
 
-import { BaseLoader } from '@llm-tools/embedjs-interfaces';
-import { getSafe, isValidURL, streamToBuffer } from '@llm-tools/embedjs-utils';
-import { WebLoader } from '@llm-tools/embedjs-loader-web';
+import { BaseLoader } from '@betalent/embedjs-interfaces';
+import { getSafe, isValidURL, streamToBuffer } from '@betalent/embedjs-utils';
+import { WebLoader } from '@betalent/embedjs-loader-web';
 
 export class MarkdownLoader extends BaseLoader<{ type: 'MarkdownLoader' }> {
     private readonly debug = createDebugMessages('embedjs:loader:MarkdownLoader');

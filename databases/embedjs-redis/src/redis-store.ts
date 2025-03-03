@@ -1,4 +1,4 @@
-import { BaseStore, Conversation, LoaderListEntry, Message } from '@llm-tools/embedjs-interfaces';
+import { BaseStore, Conversation, LoaderListEntry, Message } from '@betalent/embedjs-interfaces';
 import { Redis, RedisOptions } from 'ioredis';
 
 export class RedisStore implements BaseStore {

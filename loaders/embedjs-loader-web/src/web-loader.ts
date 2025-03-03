@@ -3,8 +3,8 @@ import createDebugMessages from 'debug';
 import { convert } from 'html-to-text';
 import md5 from 'md5';
 
-import { BaseLoader } from '@llm-tools/embedjs-interfaces';
-import { isValidURL, truncateCenterString, cleanString, getSafe } from '@llm-tools/embedjs-utils';
+import { BaseLoader } from '@betalent/embedjs-interfaces';
+import { isValidURL, truncateCenterString, cleanString, getSafe } from '@betalent/embedjs-utils';
 
 type CustomMetadata = Record<`custom${string}`, string>;
 

@@ -14,8 +14,8 @@ import {
     SIMPLE_MODELS,
     DEFAULT_INSERT_BATCH_SIZE,
     BaseEmbeddings,
-} from '@llm-tools/embedjs-interfaces';
-import { cleanString, getUnique } from '@llm-tools/embedjs-utils';
+} from '@betalent/embedjs-interfaces';
+import { cleanString, getUnique } from '@betalent/embedjs-utils';
 
 export class RAGApplication<CustomFieldsType extends Record<string, unknown>> {
     private readonly debug = createDebugMessages('embedjs:core');
@@ -99,8 +99,8 @@ export class RAGApplication<CustomFieldsType extends Record<string, unknown>> {
         if (typeof model === 'object') return model;
         else if (model === null) return null;
         else {
-            const { OpenAi } = await import('@llm-tools/embedjs-openai').catch(() => {
-                throw new Error('Package `@llm-tools/embedjs-openai` needs to be installed to use OpenAI models');
+            const { OpenAi } = await import('@betalent/embedjs-openai').catch(() => {
+                throw new Error('Package `@betalent/embedjs-openai` needs to be installed to use OpenAI models');
             });
             this.debug('Dynamically imported OpenAi');
 

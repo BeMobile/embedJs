@@ -1,8 +1,8 @@
 import { RecursiveCharacterTextSplitter } from '@langchain/textsplitters';
 import md5 from 'md5';
 
-import { BaseLoader } from '@llm-tools/embedjs-interfaces';
-import { truncateCenterString, cleanString } from '@llm-tools/embedjs-utils';
+import { BaseLoader } from '@betalent/embedjs-interfaces';
+import { truncateCenterString, cleanString } from '@betalent/embedjs-utils';
 
 type CustomMetadata = Record<`custom${string}`, string>;
 
