@@ -1,11 +1,11 @@
 {
     "name": "@betalent/embedjs-anthropic",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "Enable usage of Anthropic models with embedjs",
     "dependencies": {
         "@langchain/anthropic": "^0.3.11",
         "@langchain/core": "^0.3.26",
-        "@betalent/embedjs-interfaces": "0.1.1",
+        "@betalent/embedjs-interfaces": "0.1.2",
         "debug": "^4.4.0"
     },
     "type": "module",

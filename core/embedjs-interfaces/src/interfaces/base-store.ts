@@ -1,4 +1,4 @@
-import { Conversation, LoaderListEntry, Message } from '../types.js';
+import { Conversation, LoaderListEntry, Message, QueryResponse } from '../types.js';
 
 export interface BaseStore<CustomFieldsType extends Record<string, unknown> = Record<string, unknown>> {
     init(): Promise<void>;
@@ -18,6 +18,11 @@ export interface BaseStore<CustomFieldsType extends Record<string, unknown> = Re
     getConversation(conversationId: string, customFields: CustomFieldsType): Promise<Conversation>;
     hasConversation(conversationId: string, customFields: CustomFieldsType): Promise<boolean>;
     deleteConversation(conversationId: string, customFields: CustomFieldsType): Promise<void>;
-    addEntryToConversation(conversationId: string, entry: Message, customFields: CustomFieldsType): Promise<void>;
+    addEntryToConversation(
+        conversationId: string,
+        entry: Message,
+        customFields: CustomFieldsType,
+        tokenUse?: QueryResponse['tokenUse'],
+    ): Promise<void>;
     clearConversations(): Promise<void>;
 }

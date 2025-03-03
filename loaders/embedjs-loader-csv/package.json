@@ -1,10 +1,10 @@
 {
     "name": "@betalent/embedjs-loader-csv",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "CSV loader for embedjs",
     "dependencies": {
-        "@betalent/embedjs-interfaces": "0.1.1",
-        "@betalent/embedjs-utils": "0.1.1",
+        "@betalent/embedjs-interfaces": "0.1.2",
+        "@betalent/embedjs-utils": "0.1.2",
         "csv-parse": "^5.6.0",
         "debug": "^4.4.0",
         "md5": "^2.3.0"

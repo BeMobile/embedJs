@@ -1,11 +1,11 @@
 {
     "name": "@betalent/embedjs-loader-image",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "Load images into embedjs",
     "dependencies": {
         "@langchain/core": "^0.3.26",
-        "@betalent/embedjs-interfaces": "0.1.1",
-        "@betalent/embedjs-utils": "0.1.1",
+        "@betalent/embedjs-interfaces": "0.1.2",
+        "@betalent/embedjs-utils": "0.1.2",
         "debug": "^4.4.0",
         "exifremove": "^1.0.1",
         "md5": "^2.3.0",

@@ -124,18 +124,20 @@ export abstract class BaseModel {
             sources: uniqueSources,
         };
 
+        const tokenUse = {
+            inputTokens: response.tokenUse?.inputTokens ?? ('UNKNOWN' as const),
+            outputTokens: response.tokenUse?.outputTokens ?? ('UNKNOWN' as const),
+        };
+
         if (conversationId) {
             // Add AI response to history
-            await BaseModel.store.addEntryToConversation(conversationId, newEntry, customFields);
+            await BaseModel.store.addEntryToConversation(conversationId, newEntry, customFields, tokenUse);
         }
 
         return {
             ...newEntry,
             userEntry,
-            tokenUse: {
-                inputTokens: response.tokenUse?.inputTokens ?? 'UNKNOWN',
-                outputTokens: response.tokenUse?.outputTokens ?? 'UNKNOWN',
-            },
+            tokenUse,
         };
     }
 

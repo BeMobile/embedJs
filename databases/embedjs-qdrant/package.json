@@ -1,9 +1,9 @@
 {
     "name": "@betalent/embedjs-qdrant",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "Add Qdrant support to embedjs",
     "dependencies": {
-        "@betalent/embedjs-interfaces": "0.1.1",
+        "@betalent/embedjs-interfaces": "0.1.2",
         "@qdrant/js-client-rest": "^1.12.0",
         "debug": "^4.4.0",
         "uuid": "^11.0.3"
