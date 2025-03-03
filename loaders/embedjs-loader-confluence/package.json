@@ -1,10 +1,10 @@
 {
     "name": "@betalent/embedjs-loader-confluence",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Confluence loader for embedjs",
     "dependencies": {
-        "@betalent/embedjs-interfaces": "0.1.0",
-        "@betalent/embedjs-loader-web": "0.1.0",
+        "@betalent/embedjs-interfaces": "0.1.1",
+        "@betalent/embedjs-loader-web": "0.1.1",
         "confluence.js": "^1.7.4",
         "debug": "^4.4.0",
         "md5": "^2.3.0"

@@ -78,6 +78,7 @@ export type ModelResponse = {
 };
 
 export type QueryResponse = Extract<Message, { actor: 'AI' }> & {
+    userEntry: Extract<Message, { actor: 'HUMAN' | 'SYSTEM' }>;
     tokenUse: {
         inputTokens: number | 'UNKNOWN';
         outputTokens: number | 'UNKNOWN';

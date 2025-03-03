@@ -83,6 +83,13 @@ export abstract class BaseModel {
     ): Promise<QueryResponse> {
         let conversation: Conversation;
 
+        const userEntry = {
+            id: uuidv4(),
+            timestamp: new Date(),
+            actor: 'HUMAN' as const,
+            content: userQuery,
+        };
+
         if (conversationId) {
             if (!(await BaseModel.store.hasConversation(conversationId, customFields))) {
                 this.baseDebug(`Conversation with id '${conversationId}' is new`);
@@ -95,16 +102,7 @@ export abstract class BaseModel {
             );
 
             // Add user query to history
-            await BaseModel.store.addEntryToConversation(
-                conversationId,
-                {
-                    id: uuidv4(),
-                    timestamp: new Date(),
-                    actor: 'HUMAN',
-                    content: userQuery,
-                },
-                customFields,
-            );
+            await BaseModel.store.addEntryToConversation(conversationId, userEntry, customFields);
         } else {
             this.baseDebug('Conversation history is disabled as no conversationId was provided');
             conversation = { conversationId: 'default', entries: [] };
@@ -133,6 +131,7 @@ export abstract class BaseModel {
 
         return {
             ...newEntry,
+            userEntry,
             tokenUse: {
                 inputTokens: response.tokenUse?.inputTokens ?? 'UNKNOWN',
                 outputTokens: response.tokenUse?.outputTokens ?? 'UNKNOWN',
