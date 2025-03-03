@@ -14,10 +14,10 @@ export interface BaseStore {
     loaderCustomDelete(key: string): Promise<void>;
     deleteLoaderMetadataAndCustomValues(loaderId: string): Promise<void>;
 
-    addConversation(conversationId: string): Promise<void>;
-    getConversation(conversationId: string): Promise<Conversation>;
-    hasConversation(conversationId: string): Promise<boolean>;
-    deleteConversation(conversationId: string): Promise<void>;
-    addEntryToConversation(conversationId: string, entry: Message): Promise<void>;
+    addConversation(conversationId: string, userId: string): Promise<void>;
+    getConversation(conversationId: string, userId: string): Promise<Conversation>;
+    hasConversation(conversationId: string, userId: string): Promise<boolean>;
+    deleteConversation(conversationId: string, userId: string): Promise<void>;
+    addEntryToConversation(conversationId: string, entry: Message, userId: string): Promise<void>;
     clearConversations(): Promise<void>;
 }

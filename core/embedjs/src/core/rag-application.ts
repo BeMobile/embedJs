@@ -314,9 +314,9 @@ export class RAGApplication {
      * @param {string} conversationId - The `conversationId` that you want to delete. Pass 'default' to delete
      * the default conversation thread that is created and maintained automatically
      */
-    public async deleteConversation(conversationId: string) {
+    public async deleteConversation(conversationId: string, userId: string) {
         if (this.store) {
-            await this.store.deleteConversation(conversationId);
+            await this.store.deleteConversation(conversationId, userId);
         }
     }
 
@@ -405,7 +405,12 @@ export class RAGApplication {
      */
     public async query(
         userQuery: string,
-        options?: { conversationId?: string; customContext?: Chunk[]; filterMatch?: Record<string, string> },
+        options: {
+            userId: string;
+            conversationId?: string;
+            customContext?: Chunk[];
+            filterMatch?: Record<string, string>;
+        },
     ): Promise<QueryResponse> {
         if (!this.model) {
             throw new Error('LLM Not set; query method not available');
@@ -426,6 +431,6 @@ export class RAGApplication {
             `Query resulted in ${context.length} chunks after filteration; chunks from ${sources.length} unique sources.`,
         );
 
-        return this.model.query(this.systemMessage, userQuery, context, conversationId);
+        return this.model.query(this.systemMessage, userQuery, options.userId, context, conversationId);
     }
 }

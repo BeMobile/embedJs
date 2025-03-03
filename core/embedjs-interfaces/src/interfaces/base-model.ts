@@ -77,29 +77,34 @@ export abstract class BaseModel {
     public async query(
         system: string,
         userQuery: string,
+        userId: string,
         supportingContext: Chunk[],
         conversationId?: string,
     ): Promise<QueryResponse> {
         let conversation: Conversation;
 
         if (conversationId) {
-            if (!(await BaseModel.store.hasConversation(conversationId))) {
+            if (!(await BaseModel.store.hasConversation(conversationId, userId))) {
                 this.baseDebug(`Conversation with id '${conversationId}' is new`);
-                await BaseModel.store.addConversation(conversationId);
+                await BaseModel.store.addConversation(conversationId, userId);
             }
 
-            conversation = await BaseModel.store.getConversation(conversationId);
+            conversation = await BaseModel.store.getConversation(conversationId, userId);
             this.baseDebug(
                 `${conversation.entries.length} history entries found for conversationId '${conversationId}'`,
             );
 
             // Add user query to history
-            await BaseModel.store.addEntryToConversation(conversationId, {
-                id: uuidv4(),
-                timestamp: new Date(),
-                actor: 'HUMAN',
-                content: userQuery,
-            });
+            await BaseModel.store.addEntryToConversation(
+                conversationId,
+                {
+                    id: uuidv4(),
+                    timestamp: new Date(),
+                    actor: 'HUMAN',
+                    content: userQuery,
+                },
+                userId,
+            );
         } else {
             this.baseDebug('Conversation history is disabled as no conversationId was provided');
             conversation = { conversationId: 'default', entries: [] };
@@ -123,7 +128,7 @@ export abstract class BaseModel {
 
         if (conversationId) {
             // Add AI response to history
-            await BaseModel.store.addEntryToConversation(conversationId, newEntry);
+            await BaseModel.store.addEntryToConversation(conversationId, newEntry, userId);
         }
 
         return {

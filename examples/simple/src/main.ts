@@ -31,5 +31,6 @@ await ragApplication.addLoader(
 );
 
 await ragApplication.query('Elon Musk is the CEO of?', {
+    userId: '123',
     filterMatch: { customFarmId: 'manual', customType: 'general' },
 });
