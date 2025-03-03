@@ -1,6 +1,6 @@
 import { Conversation, LoaderListEntry, Message } from '../types.js';
 
-export interface BaseStore {
+export interface BaseStore<CustomFieldsType extends Record<string, unknown> = Record<string, unknown>> {
     init(): Promise<void>;
 
     addLoaderMetadata(loaderId: string, value: LoaderListEntry): Promise<void>;
@@ -14,10 +14,10 @@ export interface BaseStore {
     loaderCustomDelete(key: string): Promise<void>;
     deleteLoaderMetadataAndCustomValues(loaderId: string): Promise<void>;
 
-    addConversation(conversationId: string, userId: string): Promise<void>;
-    getConversation(conversationId: string, userId: string): Promise<Conversation>;
-    hasConversation(conversationId: string, userId: string): Promise<boolean>;
-    deleteConversation(conversationId: string, userId: string): Promise<void>;
-    addEntryToConversation(conversationId: string, entry: Message, userId: string): Promise<void>;
+    addConversation(conversationId: string, customFields: CustomFieldsType): Promise<void>;
+    getConversation(conversationId: string, customFields: CustomFieldsType): Promise<Conversation>;
+    hasConversation(conversationId: string, customFields: CustomFieldsType): Promise<boolean>;
+    deleteConversation(conversationId: string, customFields: CustomFieldsType): Promise<void>;
+    addEntryToConversation(conversationId: string, entry: Message, customFields: CustomFieldsType): Promise<void>;
     clearConversations(): Promise<void>;
 }

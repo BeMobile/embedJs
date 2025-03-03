@@ -3,10 +3,12 @@ import { RAGApplicationBuilder, TextLoader } from '@llm-tools/embedjs';
 import { OpenAi, OpenAiEmbeddings } from '@llm-tools/embedjs-openai';
 import { WebLoader } from '@llm-tools/embedjs-loader-web';
 import { QdrantDb } from '@llm-tools/embedjs-qdrant';
+import { MemoryStore } from 'core/embedjs/src/store/memory-store.js';
 
 const ragApplication = await new RAGApplicationBuilder()
     .setModel(new OpenAi({ model: 'gpt-4o-mini-2024-07-18', maxTokens: 8192 }))
     .setEmbeddingModel(new OpenAiEmbeddings())
+    .setStore<{ userId: string }>(new MemoryStore())
     .setVectorDatabase(
         new QdrantDb({
             url: 'http://localhost:6333',
@@ -30,7 +32,8 @@ await ragApplication.addLoader(
     }),
 );
 
-await ragApplication.query('Elon Musk is the CEO of?', {
-    userId: '123',
-    filterMatch: { customFarmId: 'manual', customType: 'general' },
-});
+await ragApplication.query(
+    'Elon Musk is the CEO of?',
+    { filterMatch: { customFarmId: 'manual', customType: 'general' } },
+    { userId: '123' },
+);

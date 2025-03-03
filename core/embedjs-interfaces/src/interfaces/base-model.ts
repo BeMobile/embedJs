@@ -77,19 +77,19 @@ export abstract class BaseModel {
     public async query(
         system: string,
         userQuery: string,
-        userId: string,
+        customFields: Record<string, unknown>,
         supportingContext: Chunk[],
         conversationId?: string,
     ): Promise<QueryResponse> {
         let conversation: Conversation;
 
         if (conversationId) {
-            if (!(await BaseModel.store.hasConversation(conversationId, userId))) {
+            if (!(await BaseModel.store.hasConversation(conversationId, customFields))) {
                 this.baseDebug(`Conversation with id '${conversationId}' is new`);
-                await BaseModel.store.addConversation(conversationId, userId);
+                await BaseModel.store.addConversation(conversationId, customFields);
             }
 
-            conversation = await BaseModel.store.getConversation(conversationId, userId);
+            conversation = await BaseModel.store.getConversation(conversationId, customFields);
             this.baseDebug(
                 `${conversation.entries.length} history entries found for conversationId '${conversationId}'`,
             );
@@ -103,7 +103,7 @@ export abstract class BaseModel {
                     actor: 'HUMAN',
                     content: userQuery,
                 },
-                userId,
+                customFields,
             );
         } else {
             this.baseDebug('Conversation history is disabled as no conversationId was provided');
@@ -128,7 +128,7 @@ export abstract class BaseModel {
 
         if (conversationId) {
             // Add AI response to history
-            await BaseModel.store.addEntryToConversation(conversationId, newEntry, userId);
+            await BaseModel.store.addEntryToConversation(conversationId, newEntry, customFields);
         }
 
         return {

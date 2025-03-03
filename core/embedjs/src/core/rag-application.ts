@@ -17,7 +17,7 @@ import {
 } from '@llm-tools/embedjs-interfaces';
 import { cleanString, getUnique } from '@llm-tools/embedjs-utils';
 
-export class RAGApplication {
+export class RAGApplication<CustomFieldsType extends Record<string, unknown>> {
     private readonly debug = createDebugMessages('embedjs:core');
     private readonly storeConversationsToDefaultThread: boolean;
     private readonly embeddingRelevanceCutOff: number;
@@ -25,7 +25,7 @@ export class RAGApplication {
     private readonly systemMessage: string;
     private readonly vectorDatabase: BaseVectorDatabase;
     private readonly embeddingModel: BaseEmbeddings;
-    private readonly store: BaseStore;
+    private readonly store: BaseStore<CustomFieldsType>;
     private loaders: BaseLoader[];
     private model: BaseModel;
 
@@ -314,9 +314,9 @@ export class RAGApplication {
      * @param {string} conversationId - The `conversationId` that you want to delete. Pass 'default' to delete
      * the default conversation thread that is created and maintained automatically
      */
-    public async deleteConversation(conversationId: string, userId: string) {
+    public async deleteConversation(conversationId: string, customFields: CustomFieldsType) {
         if (this.store) {
-            await this.store.deleteConversation(conversationId, userId);
+            await this.store.deleteConversation(conversationId, customFields);
         }
     }
 
@@ -406,11 +406,11 @@ export class RAGApplication {
     public async query(
         userQuery: string,
         options: {
-            userId: string;
             conversationId?: string;
             customContext?: Chunk[];
             filterMatch?: Record<string, string>;
         },
+        customFields: CustomFieldsType,
     ): Promise<QueryResponse> {
         if (!this.model) {
             throw new Error('LLM Not set; query method not available');
@@ -431,6 +431,6 @@ export class RAGApplication {
             `Query resulted in ${context.length} chunks after filteration; chunks from ${sources.length} unique sources.`,
         );
 
-        return this.model.query(this.systemMessage, userQuery, options.userId, context, conversationId);
+        return this.model.query(this.systemMessage, userQuery, customFields, context, conversationId);
     }
 }

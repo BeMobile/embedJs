@@ -9,12 +9,13 @@ import {
 import { MemoryStore } from '../store/memory-store.js';
 import { RAGApplication } from './rag-application.js';
 
-export class RAGApplicationBuilder {
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export class RAGApplicationBuilder<CustomFieldsType extends Record<string, unknown> = {}> {
     private temperature: number;
     private model: BaseModel | SIMPLE_MODELS | null;
     private vectorDatabase: BaseVectorDatabase;
     private loaders: BaseLoader[];
-    private store: BaseStore;
+    private store: BaseStore<CustomFieldsType>;
     private systemMessage: string;
     private searchResultCount: number;
     private embeddingModel: BaseEmbeddings;
@@ -42,7 +43,7 @@ export class RAGApplicationBuilder {
      * @returns An instance of the `RAGApplication` class after it has been initialized asynchronously.
      */
     async build() {
-        const entity = new RAGApplication(this);
+        const entity = new RAGApplication<CustomFieldsType>(this);
         await entity.init(this);
         return entity;
     }
@@ -73,9 +74,9 @@ export class RAGApplicationBuilder {
         return this;
     }
 
-    setStore(store: BaseStore) {
+    setStore<T extends CustomFieldsType>(store: BaseStore<T>) {
         this.store = store;
-        return this;
+        return this as RAGApplicationBuilder<T>;
     }
 
     setTemperature(temperature: number) {
